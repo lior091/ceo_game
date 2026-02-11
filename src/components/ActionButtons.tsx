@@ -15,9 +15,9 @@ const actions: { action: Action; label: string; icon: string }[] = [
 
 export default function ActionButtons({ onAction, disabled, gamePhase }: ActionButtonsProps) {
   const phaseStyles = {
-    early: 'rounded-xl p-6 text-lg font-medium shadow-md hover:shadow-lg',
-    mid: 'rounded-lg p-4 text-base font-semibold shadow-sm hover:shadow-md',
-    late: 'rounded p-3 text-sm font-bold shadow-lg border-2 border-white hover:border-danger'
+    early: 'rounded-xl p-4 sm:p-6 text-base sm:text-lg font-medium shadow-md hover:shadow-lg',
+    mid: 'rounded-lg p-3 sm:p-4 text-sm sm:text-base font-semibold shadow-sm hover:shadow-md',
+    late: 'rounded p-2.5 sm:p-3 text-xs sm:text-sm font-bold shadow-lg border-2 border-white hover:border-danger'
   };
 
   const baseButtonStyles = {
@@ -49,6 +49,7 @@ export default function ActionButtons({ onAction, disabled, gamePhase }: ActionB
             transition-all duration-200
             disabled:opacity-50 disabled:cursor-not-allowed
             min-h-[48px] min-w-[120px]
+            touch-manipulation
             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy
           `}
           aria-label={`${label} action`}

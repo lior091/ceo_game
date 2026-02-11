@@ -305,14 +305,14 @@ export default function Game() {
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col">
       {/* Top bar */}
-      <header className="h-14 flex items-center justify-between px-6 bg-slate-900 text-slate-50 border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold tracking-wide">CEO Mail</span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-400/40">
+      <header className="h-14 flex items-center justify-between px-3 sm:px-6 bg-slate-900 text-slate-50 border-b border-slate-800">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <span className="text-sm sm:text-base font-semibold tracking-wide">CEO Mail</span>
+          <span className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-600 text-white border border-emerald-500 font-medium">
             Simulator
           </span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <Timer timeRemaining={Math.ceil(gameState.timeRemaining)} gamePhase={visualPhase} />
           <div className="hidden sm:flex items-center gap-4 text-xs text-slate-200">
             <div className="flex items-center gap-1">
@@ -331,10 +331,10 @@ export default function Game() {
         </div>
       </header>
 
-      {/* Main inbox layout */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Sidebar / left column: meters + inbox list */}
-        <aside className="w-80 max-w-xs border-r border-slate-200 bg-white flex flex-col">
+      {/* Main inbox layout - responsive */}
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+        {/* Sidebar / left column: meters + inbox list - hidden on mobile, shown on desktop */}
+        <aside className="hidden md:flex w-80 max-w-xs border-r border-slate-200 bg-white flex-col">
           <div className="p-4 border-b border-slate-200">
             <MeterDisplay meters={gameState.meters} gamePhase={visualPhase} />
           </div>
@@ -384,8 +384,19 @@ export default function Game() {
         </aside>
 
         {/* Right column: reading pane + actions */}
-        <main className="flex-1 flex flex-col bg-slate-50">
-          <div className="flex-1 p-4">
+        <main className="flex-1 flex flex-col bg-slate-50 overflow-auto">
+          {/* Meters - shown on mobile at top */}
+          <div className="md:hidden p-3 border-b border-slate-200 bg-white">
+            <MeterDisplay meters={gameState.meters} gamePhase={visualPhase} />
+            <div className="mt-2 flex items-center justify-between text-xs text-slate-600">
+              <span className="font-semibold uppercase tracking-wide">Inbox</span>
+              <span className="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200">
+                {inboxCount} messages
+              </span>
+            </div>
+          </div>
+
+          <div className="flex-1 p-3 sm:p-4 min-h-0">
             <MessageBox
               message={gameState.currentMessage}
               timeRemaining={gameState.timeRemaining}
@@ -393,7 +404,7 @@ export default function Game() {
             />
           </div>
 
-          <div className="border-t border-slate-200 bg-white px-4 py-3 flex flex-col gap-3">
+          <div className="border-t border-slate-200 bg-white px-3 sm:px-4 py-3 flex flex-col gap-3">
             <ActionButtons
               onAction={handleAction}
               disabled={gameState.currentMessage === null}
@@ -409,7 +420,8 @@ export default function Game() {
                            bg-danger text-white rounded-full shadow-md
                            hover:bg-red-600 hover:shadow-lg
                            active:scale-95 transition-transform transition-shadow transition-colors
-                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-danger"
+                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-danger
+                           touch-manipulation"
               >
                 Panic: Give Up & Restart
               </button>

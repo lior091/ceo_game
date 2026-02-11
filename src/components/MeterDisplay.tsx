@@ -27,7 +27,7 @@ export default function MeterDisplay({ meters, gamePhase }: MeterDisplayProps) {
   ];
 
   return (
-    <div className="space-y-4 w-full">
+    <div className="space-y-3 sm:space-y-4 w-full">
       {metersConfig.map((meter) => {
         const dangerColor = getMeterColor(meter.value, meter.isStress);
         const barColor = dangerColor || meter.color;
@@ -35,10 +35,10 @@ export default function MeterDisplay({ meters, gamePhase }: MeterDisplayProps) {
         return (
           <div key={meter.label} className="w-full">
             <div className="flex justify-between mb-1">
-              <span className="text-sm font-medium text-gray-700">{meter.label}</span>
-              <span className="text-sm font-medium text-gray-700">{Math.round(meter.value)}/100</span>
+              <span className="text-xs sm:text-sm font-medium text-gray-700">{meter.label}</span>
+              <span className="text-xs sm:text-sm font-medium text-gray-700">{Math.round(meter.value)}/100</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+            <div className="w-full bg-gray-200 rounded-full h-3 sm:h-4 overflow-hidden">
               <div
                 className={`h-full ${barColor} transition-all ${getTransitionDuration()} ease-out`}
                 style={{ width: `${meter.value}%` }}

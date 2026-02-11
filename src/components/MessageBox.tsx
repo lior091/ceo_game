@@ -42,28 +42,28 @@ export default function MessageBox({ message, timeRemaining, inboxCount }: Messa
       )}
 
       {/* Header row like an email */}
-      <div className="border-b border-slate-200 px-4 py-2 flex items-center justify-between">
-        <div className="flex flex-col">
-          <span className="text-xs font-semibold text-slate-500 uppercase">From</span>
-          <span className="text-sm text-slate-800">
+      <div className="border-b border-slate-200 px-3 sm:px-4 py-2 flex items-center justify-between">
+        <div className="flex flex-col min-w-0 flex-1">
+          <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase">From</span>
+          <span className="text-xs sm:text-sm text-slate-800 truncate">
             {message.impactArea === 'people' && 'People Ops'}
             {message.impactArea === 'product' && 'Product & Engineering'}
             {message.impactArea === 'money' && 'Finance & Revenue'}
           </span>
         </div>
-        <div className="flex items-center gap-2 text-xs text-slate-500">
-          <span className="px-2 py-0.5 rounded-full border border-slate-300 uppercase">
+        <div className="flex items-center gap-2 text-[10px] sm:text-xs text-slate-500 flex-shrink-0 ml-2">
+          <span className="px-1.5 sm:px-2 py-0.5 rounded-full border border-slate-300 uppercase whitespace-nowrap">
             {message.urgency}
           </span>
         </div>
       </div>
 
       {/* Subject + body */}
-      <div className="px-4 py-3 space-y-2 flex-1 overflow-auto">
-        <div className="font-semibold text-sm text-slate-900">
+      <div className="px-3 sm:px-4 py-2 sm:py-3 space-y-2 flex-1 overflow-auto">
+        <div className="font-semibold text-xs sm:text-sm text-slate-900">
           CEO: you need to make a call on this.
         </div>
-        <p className="text-sm text-slate-700 leading-relaxed">
+        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
           {message.text}
         </p>
       </div>
