@@ -1,0 +1,184 @@
+CEO Simulator
+Product Requirements Document
+Version
+1.0
+Status
+Workshop Spec
+Date
+February 2026
+
+Executive Summary
+	•	A 5-minute decision-making game where players act as CEO, responding to an endless stream of inbox messages under pressure.
+	•	Core premise: Being CEO is not about making the best decision—it's about making a decision under pressure.
+	•	Players manage three metrics (Team Trust, Business Health, CEO Stress) by choosing one of four actions for each message (Handle Now, Delegate, Defer, Ignore).
+	•	There is no win condition. The game ends when time expires, revealing what kind of CEO the player was.
+
+Problem Statement
+Leadership training focuses heavily on strategy and decision quality, but rarely on decision-making under realistic constraints: incomplete information, competing priorities, and time pressure. This game tests what happens when speed matters more than perfection.
+The player will quickly discover that no single strategy works. Handling every issue burns stress. Delegating everything erodes trust. Deferring too much loses momentum. The game forces players to accept trade-offs and live with consequences.
+
+Business Opportunity
+Use Cases
+	•	Corporate leadership training and executive coaching
+	•	Business school curricula (MBA, executive education)
+	•	Team-building and decision-making workshops
+	•	Interactive learning platforms and mobile apps
+
+Value Proposition
+	•	Immediate feedback: Players see consequences of their decisions within seconds
+	•	Memorable: The 5-minute time limit creates genuine pressure and makes the experience stick
+	•	Repeatable: Each game is unique (AI-generated messages), encouraging replays
+	•	Reflective: The end-game summary mirrors the player back to themselves ("You prioritized speed over people")
+
+Product Vision
+A minimalist decision-making game that teaches leadership under constraint through immediate, consequences-rich gameplay.
+
+Goals & Success Metrics
+Primary Goal
+Enable players to experience the tension between competing priorities and understand the cost of different leadership styles.
+
+Success Metrics
+	•	Completion: 95%+ of players finish a full 5-minute game
+	•	Engagement: Players replay the game within the same session
+	•	Learning: End-game reflection resonates with player's decisions
+	•	Design clarity: No in-game confusion about what actions do
+
+Functional Requirements
+Core Game Loop
+	•	Game displays a single inbox message
+	•	Player selects one of four actions (Handle Now, Delegate, Defer, Ignore)
+	•	Company metrics update based on the action and message type
+	•	Next message arrives (with increasing frequency as time runs out)
+	•	Game ends at 5 minutes. Final metrics and reflection are displayed.
+
+Inbox Messages
+	•	Short, emotionally loaded, ambiguous (60-100 characters)
+	•	Internally tagged by: Urgency (High/Medium/Low), Impact Area (People/Product/Money), Emotional Weight (Urgent/Neutral/Concerning)
+	•	AI generates messages dynamically; each game has unique messages
+	•	Messages occasionally reference prior decisions (e.g., "Engineers you delegated to last week say they're burned out.")
+
+The Four Actions
+Action
+Immediate Effect
+Delayed Effect
+Handle Now
+Stress +10
+Business +15
+Delegate
+Stress -5
+Team Trust -8
+Defer
+Stress -3 (now)
+Business -10 (later)
+Ignore
+Stress -8
+Team Trust -15, Business -10
+
+Note: Effects vary by message type. High-urgency messages have stronger consequences. Some delayed effects trigger mid-game, making past decisions visible.
+
+Company State (Three Meters)
+Meter
+Range
+Meaning
+Team Trust
+0–100
+Do your people believe in you?
+Business Health
+0–100
+Is the company solvent and growing?
+CEO Stress
+0–100
+Can you sustain this pace?
+
+Starting values: Team Trust 70, Business Health 60, CEO Stress 30. If any meter reaches 0 or 100, the game does not auto-end—but the end-screen reflection changes tone.
+
+Time Pressure
+	•	Total game time: 5 minutes (300 seconds)
+	•	Messages arrive at increasing frequency: slow start (1 message per 10 sec), then accelerate to 1 per 3 sec by minute 5
+	•	UI becomes visually denser and transitions faster as time runs out
+
+Vibe Design
+The UI itself should make the player feel pressure, not just the clock.
+Phase
+Visual Tone
+Goal
+0–1 min
+Calm: soft colors, spacious layout, reassuring copy
+Players feel in control
+1–3 min
+Neutral: tighter spacing, matter-of-fact copy
+Pressure builds subtly
+3–5 min
+Urgent: high contrast, compressed UI, faster animations, blunt copy
+Players feel the clock
+
+End Screen
+	•	Display final meter values (Team Trust, Business Health, CEO Stress)
+	•	Show a short, reflective summary based on the player's profile (e.g., "You prioritized speed over people." or "You protected your team but lost momentum.")
+	•	No score. No ranking. Just reflection.
+	•	Option to play again (reset and start a new game)
+
+User Stories
+US1: Player starts the game
+	•	As a player, I want to see the starting state (meters, first message) immediately, so I can begin making decisions without confusion.
+
+US2: Player receives and responds to messages
+	•	As a player, I want to see a message and pick one of four actions (no typing, no explanation), so I can make fast decisions under pressure.
+
+US3: Meters update visibly
+	•	As a player, I want to see my meters change immediately after each decision, so I can understand the consequence of my action.
+
+US4: Time pressure increases
+	•	As a player, I want messages to arrive faster and the UI to feel more chaotic near the end, so I experience the actual rush of running out of time.
+
+US5: Game ends and reflects
+	•	As a player, I want to see my final meters and a reflective summary that mirrors my decisions back to me, so I understand what kind of leader I just was.
+
+Non-Functional Requirements
+Performance
+	•	Game starts in < 2 seconds
+	•	Next message appears < 500ms after player action
+	•	Meter updates are instant (no loading screens)
+
+Compatibility
+	•	Works on desktop browsers (Chrome, Firefox, Safari)
+	•	Works on mobile (iOS Safari, Android Chrome)
+	•	Touch-friendly buttons for mobile (min 48x48px)
+
+Accessibility
+	•	High contrast (AA WCAG standard minimum)
+	•	Keyboard navigation supported (Tab through actions)
+	•	Screen reader compatible for messages and meter values
+
+Out of Scope
+	•	Multiplayer or competitive modes
+	•	Persistent game state or save functionality
+	•	Detailed analytics or telemetry
+	•	Customizable game difficulty
+	•	Leaderboards or achievement badges
+
+AI Integration
+Role
+AI is used to generate realistic, varied inbox messages. It does not decide game outcomes or judge the player.
+
+AI Responsibilities
+	•	Generate 30–50 unique messages per game session
+	•	Vary tone: some messages are urgent, some casual, some passive-aggressive
+	•	Occasionally reference earlier decisions (e.g., if player delegated earlier, a message might say "Your delegated task just blew up.")
+	•	Respect internal tagging: messages are labeled with urgency, impact area, and emotional weight, but these labels are hidden from the player
+
+AI Constraints
+	•	Messages must be 60–100 characters (fits one UI line)
+	•	No punctuation-only messages
+	•	Must be business-relevant (no random content)
+	•	AI does not name individual people (stays generic: "A senior engineer," "Your CFO," "The board")
+
+Timeline & Scope
+This is a workshop spec for 2-hour solo design sprints. Each designer builds their own version independently. Estimated build time per designer: 90 minutes for a playable MVP.
+
+Success Criteria
+	•	Game is playable end-to-end (message arrives, player chooses action, meter updates, next message, timer runs out, end screen shows)
+	•	Decisions feel consequential (players can see how their actions changed the meters)
+	•	Time pressure is felt (either through accelerating message frequency or visual intensity)
+	•	No in-game confusion (players understand what each button does without explanation)
+	•	End-game reflection lands (the summary resonates with the player's choices)
